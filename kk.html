@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>بوابة الدكتوراه | تسجيل الدخول</title>
+    <!-- Bootstrap 5 RTL + Icons + Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts (Cairo + Tajawal for modern arabic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6f 100%);
+            font-family: 'Cairo', 'Segoe UI', 'Tajawal', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 1.5rem;
+        }
+
+        /* decorative wave / overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" fill-opacity="0.2" d="M0,192L48,186.7C96,181,192,171,288,176C384,181,480,203,576,208C672,213,768,203,864,186.7C960,171,1056,149,1152,138.7C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 460px;
+            transition: transform 0.25s ease;
+            border: none;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header-custom {
+            background: linear-gradient(120deg, #1e3c4c 0%, #0f2c3b 100%);
+            padding: 2rem 1.5rem 1.8rem;
+            text-align: center;
+            color: white;
+            border-bottom: 4px solid #ffb347;
+        }
+
+        .logo-icon {
+            font-size: 3.2rem;
+            background: rgba(255, 255, 255, 0.15);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+        }
+
+        .card-header-custom h3 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.3px;
+        }
+
+        .card-header-custom p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-bottom: 0;
+        }
+
+        .form-body {
+            padding: 2rem 2rem 2rem 2rem;
+        }
+
+        .input-group-custom {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group-custom i {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 1.1rem;
+            z-index: 10;
+            transition: color 0.2s;
+        }
+
+        .form-control-custom {
+            width: 100%;
+            padding: 0.9rem 2.8rem 0.9rem 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 1.2rem;
+            background-color: #fefefe;
+            transition: all 0.25s;
+            font-family: 'Cairo', monospace;
+        }
+
+        .form-control-custom:focus {
+            border-color: #ffb347;
+            box-shadow: 0 0 0 4px rgba(255, 180, 71, 0.2);
+            outline: none;
+            background-color: #fff;
+        }
+
+        /* toggle password eye */
+        .toggle-password {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color 0.2s;
+            z-index: 10;
+        }
+
+        .toggle-password:hover {
+            color: #1e3c4c;
+        }
+
+        .btn-login {
+            background: linear-gradient(95deg, #1e3c4c 0%, #2a5f7a 100%);
+            border: none;
+            padding: 0.85rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 2rem;
+            width: 100%;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            color: white;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(95deg, #12313f 0%, #1d4d68 100%);
+            transform: scale(0.98);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-login i {
+            margin-left: 8px;
+        }
+
+        .forgot-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .forgot-links a {
+            text-decoration: none;
+            color: #2a5f7a;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .forgot-links a:hover {
+            color: #ffb347;
+            text-decoration: underline;
+        }
+
+        .alert-message {
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+            border-radius: 1rem;
+            display: none;
+        }
+
+        .alert-message.show {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        hr {
+            margin: 1.5rem 0 0.5rem;
+            opacity: 0.3;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #6c757d;
+            margin-top: 1.2rem;
+        }
+
+        @media (max-width: 480px) {
+            .form-body {
+                padding: 1.5rem;
+            }
+            .card-header-custom {
+                padding: 1.5rem 1rem;
+            }
+            .logo-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="card-header-custom">
+        <div class="logo-icon">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>بوابة الدكتوراه</h3>
+        <p>نظام متابعة الدراسات العليا والبحث العلمي</p>
+    </div>
+
+    <div class="form-body">
+        <!-- Dynamic alert for errors (client-side demo) -->
+        <div id="loginAlert" class="alert alert-danger alert-message" role="alert">
+            <i class="fas fa-exclamation-triangle"></i> <span id="alertText">خطأ في بيانات الدخول</span>
+        </div>
+
+        <form id="loginForm" action="login.php" method="POST" novalidate>
+            <div class="input-group-custom">
+                <i class="fas fa-user"></i>
+                <input type="text" class="form-control-custom" id="username" name="username" placeholder="اسم المستخدم (البريد الإلكتروني أو المعرف)" autocomplete="username" required>
+            </div>
+
+            <div class="input-group-custom">
+                <i class="fas fa-lock"></i>
+                <input type="password" class="form-control-custom" id="password" name="password" placeholder="كلمة المرور" autocomplete="current-password" required>
+                <button type="button" class="toggle-password" id="togglePasswordBtn" aria-label="إظهار/إخفاء كلمة المرور">
+                    <i class="far fa-eye-slash" id="toggleIcon"></i>
+                </button>
+            </div>
+
+            <button type="submit" class="btn btn-login" id="submitBtn">
+                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+            </button>
+
+            <div class="forgot-links">
+                <a href="#" id="forgotPasswordLink"><i class="fas fa-question-circle"></i> نسيت كلمة المرور؟</a>
+                <a href="#" id="registerHint"><i class="fas fa-user-plus"></i> طلب حساب جديد</a>
+            </div>
+            <hr>
+            <div class="footer-note">
+                <i class="fas fa-shield-alt"></i> بيئة آمنة | الدخول الموحد للباحثين والأساتذة
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle (optional for interactivity but not required for style) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    (function() {
+        // DOM elements
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const alertBox = document.getElementById('loginAlert');
+        const alertTextSpan = document.getElementById('alertText');
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+        const toggleIcon = document.getElementById('toggleIcon');
+        const forgotLink = document.getElementById('forgotPasswordLink');
+        const registerHint = document.getElementById('registerHint');
+
+        // Helper to show alert message with custom text
+        function showAlert(message, isError = true) {
+            alertTextSpan.innerText = message;
+            alertBox.classList.add('show');
+            // optional auto-hide after 5 seconds
+            setTimeout(() => {
+                if (alertBox.classList.contains('show')) {
+                    alertBox.classList.remove('show');
+                }
+            }, 5000);
+            if (isError) {
+                alertBox.classList.remove('alert-success');
+                alertBox.classList.add('alert-danger');
+            } else {
+                alertBox.classList.remove('alert-danger');
+                alertBox.classList.add('alert-success');
+            }
+        }
+
+        function hideAlert() {
+            alertBox.classList.remove('show');
+        }
+
+        // Toggle password visibility
+        if (toggleBtn && passwordInput && toggleIcon) {
+            toggleBtn.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                // toggle eye icon
+                if (type === 'text') {
+                    toggleIcon.classList.remove('fa-eye-slash');
+                    toggleIcon.classList.add('fa-eye');
+                } else {
+                    toggleIcon.classList.remove('fa-eye');
+                    toggleIcon.classList.add('fa-eye-slash');
+                }
+            });
+        }
+
+        // --- client-side validation and enhanced demo (non-intrusive, but keeps professional feedback)
+        // We keep action="login.php" so real backend can handle. But we provide nice validation & prevent empty sends.
+        loginForm.addEventListener('submit', function(event) {
+            let username = usernameInput.value.trim();
+            let password = passwordInput.value.trim();
+
+            // reset previous alerts
+            hideAlert();
+
+            // Advanced front-end validation: empty fields
+            if (username === "") {
+                event.preventDefault();  // stop submission
+                showAlert("يرجى إدخال اسم المستخدم", true);
+                usernameInput.focus();
+                return false;
+            }
+            if (password === "") {
+                event.preventDefault();
+                showAlert("يرجى إدخال كلمة المرور", true);
+                passwordInput.focus();
+                return false;
+            }
+
+            // Optional: email format hint if username looks like not email? just user-friendly pattern
+            // but it's not mandatory, only if you want extra.
+            // Here we just show a graceful message that doesn't block if credentials are demo? but real backend will decide.
+            // However, we want to simulate professionalism: if user uses 'admin' or 'student' demo we give demo info? but no conflict.
+            // Actually we provide optional demo helper: we don't block but we can add extra demo note for first time?
+            // But the requirement is to "make code more professional" without breaking original PHP action.
+            // We'll also add loading state to button.
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحقق...';
+                // re-enable after form submits? form submission will reload page anyway.
+                // But if there is network delay, we prevent double click.
+                setTimeout(() => {
+                    // if form didn't submit due to any error (but it already called preventDefault), we restore.
+                    // In case form is submitted normally, it's okay.
+                }, 200);
+            }
+            // if everything ok, form submits to login.php (original backend)
+            // we also add a small optional demo success message for testing? Not needed, but let's keep seamless.
+            return true;
+        });
+
+        // Edge case: restore button if form submission fails due to navigation or prevent default?
+        // Not needed because page unloads. But in case of validation error we must restore.
+        // we also attach an error catcher for when submit is prevented and button stuck.
+        window.addEventListener('load', function() {
+            const btn = document.getElementById('submitBtn');
+            if (btn) {
+                // Reset any stuck state on page load (if any)
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> تسجيل الدخول';
+            }
+        });
+
+        // extra interactive demo for links (Forget / register) - show nice informative alert (non intrusive)
+        forgotLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showAlert("تم إرسال رابط استعادة كلمة المرور إلى بريدك الإلكتروني (وهمي) - سيتم تفعيل الخدمة قريباً", false);
+        });
+
+        registerHint.addEventListener('click', function(e) {
+            e.preventDefault();
+            showAlert("للتسجيل كباحث جديد، يرجى التواصل مع وحدة الدكتوراه أو زيارة مكتب التسجيل. شكراً لاهتمامكم!", false);
+        });
+
+        // Optional: live input styling remove alert on typing
+        usernameInput.addEventListener('input', function() {
+            hideAlert();
+        });
+        passwordInput.addEventListener('input', function() {
+            hideAlert();
+        });
+
+        // Also add security demonstration: prevent XSS attempts in alert message display (sanitized via textContent)
+        // Add extra floating label effect? Already neat.
+        // Also show placeholder animation: fine.
+
+        // Bonus: add demo credentials hint but without hardcoding as popup? we can add small toast message for help desk? 
+        // But to respect professional environment we just add optional console hint for devs but not visible for users.
+        // However, good practice: no default credentials on screen, but we can add help link via tooltip.
+        // I will add a small "مساعدة" tooltip near forgot? but not needed.
+        // Also modern: set autocomplete attributes for security.
+        console.log("تم تهيئة نموذج الدخول بشكل احترافي | Doctorate Portal");
+    })();
+</script>
+
+<!-- Add any extra fallback for smooth RTL and touch -->
+<noscript>
+    <div style="background:#f8d7da; text-align:center; padding:10px;">يرجى تفعيل الجافا سكريبت لتجربة أفضل في بوابة الدكتوراه</div>
+</noscript>
+</body>
+</html>
